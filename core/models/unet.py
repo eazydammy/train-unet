@@ -59,7 +59,7 @@ class UNet(nn.Module):
     def __init_weight(self):
         for module in self.modules():
             if isinstance(module, nn.Conv2d) or isinstance(module, nn.Linear):
-                nn.init.kaiming_normal(module.weight)
+                nn.init.kaiming_normal_(module.weight)
                 if module.bias is not None:
                     module.bias.data.zero_()
             elif isinstance(module, nn.BatchNorm2d):
@@ -95,10 +95,10 @@ class UNet(nn.Module):
         bottleneck = self.bottleneck(encode_block4)
 
         # Decode
-        decode_block4 = self.decode4(torch.cat([bottleneck, F.upsample(encode_block4, bottleneck.size()[2:], mode='bilinear')], 1))
-        decode_block3 = self.decode3(torch.cat([decode_block4, F.upsample(encode_block3, decode_block4.size()[2:], mode='bilinear')], 1))
-        decode_block2 = self.decode2(torch.cat([decode_block3, F.upsample(encode_block2, decode_block3.size()[2:], mode='bilinear')], 1))
-        final_layer = self.final_layer(torch.cat([decode_block2, F.upsample(encode_block1, decode_block2.size()[2:], mode='bilinear')], 1))
+        decode_block4 = self.decode4(torch.cat([bottleneck, F.upsample(encode_block4, bottleneck.size()[2:], mode='bilinear', align_corners=True)], 1))
+        decode_block3 = self.decode3(torch.cat([decode_block4, F.upsample(encode_block3, decode_block4.size()[2:], mode='bilinear', align_corners=True)], 1))
+        decode_block2 = self.decode2(torch.cat([decode_block3, F.upsample(encode_block2, decode_block3.size()[2:], mode='bilinear', align_corners=True)], 1))
+        final_layer = self.final_layer(torch.cat([decode_block2, F.upsample(encode_block1, decode_block2.size()[2:], mode='bilinear', align_corners=True)], 1))
         
         return F.upsample(final_layer, x.size()[2:], mode='bilinear')
 
