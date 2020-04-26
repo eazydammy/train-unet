@@ -111,7 +111,7 @@ weights/
 *.pth
 
 # dataset
-datasets/
+#datasets/
 VOCdevket/
 eval/
 
