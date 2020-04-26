@@ -251,7 +251,6 @@ if __name__ == '__main__':
     else:
         args.device = "cpu"
 
-    cudnn.benchmark = False
     args.lr = args.lr * args.num_gpus
 
     logger = setup_logger("semantic_segmentation", args.log_dir, filename='unet_ade20k_log.txt')
