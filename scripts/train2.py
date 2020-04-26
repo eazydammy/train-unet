@@ -162,7 +162,7 @@ class Trainer(object):
         self.model.train()
         for iteration, (images, targets, _) in enumerate(self.train_loader):
             iteration = iteration + 1
-            self.lr_scheduler.step()
+            
 
             images = images.to(self.device)
             targets = targets.to(self.device)
@@ -175,6 +175,7 @@ class Trainer(object):
             self.optimizer.zero_grad()
             losses.backward()
             self.optimizer.step()
+            self.lr_scheduler.step()
 
             eta_seconds = ((time.time() - start_time) / iteration) * (max_iters - iteration)
             eta_string = str(datetime.timedelta(seconds=int(eta_seconds)))
@@ -249,6 +250,8 @@ if __name__ == '__main__':
         args.device = "cuda"
     else:
         args.device = "cpu"
+
+    cudnn.benchmark = False
 
     args.lr = args.lr * args.num_gpus
 
