@@ -1,4 +1,5 @@
 from models.nn import get_model
+from models.nn.unet import get_unet
 from datasets import get_train_val_loader, get_dataset_tools
 import torch
 from loss import SegmentationLoss
@@ -14,7 +15,6 @@ from PIL import Image
 import numpy as np
 from utils.color import add_color
 from torchviz import make_dot
-import copy
 
 class Manager(object):
 
@@ -27,7 +27,9 @@ class Manager(object):
         else:
             self.dataset = get_dataset_tools(args.dataset, **self.kwargs)
 
-        self.model = get_model(name=args.model, **self.kwargs)
+        # self.model = get_model(name=args.model, **self.kwargs)
+        self.model = get_unet(backbone='resnet50', model_pretrained=True,
+               model_pretrain_path=None, dataset='ade20k', norm='bn', **self.kwargs)
 
         # g = make_dot(self.model(torch.rand(16, 3, 384, 384)), params=dict(self.model.named_parameters()))
         # g.render('deeplabv3')
