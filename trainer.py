@@ -32,7 +32,7 @@ class Trainer(BaseTrainer):
             self.train_loader = DataPrefetcher(train_loader, device=self.device)
             self.val_loader = DataPrefetcher(val_loader, device=self.device)
 
-        torch.backends.cudnn.benchmark = False
+        torch.backends.cudnn.benchmark = True
 
     def _train_epoch(self, epoch):
         self.logger.info('\n')
