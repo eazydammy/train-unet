@@ -26,7 +26,7 @@ class Manager(object):
         else:
             self.dataset = get_dataset_tools(args.dataset, **self.kwargs)
 
-        self.kwargs2 = tuple(x for x in self.kwargs if x[0] != 'model')
+        self.kwargs2 = vars(tuple(x for x in self.kwargs if x[0] != 'model'))
         self.model = get_model(name=args.model, **self.kwargs2)
 
         # g = make_dot(self.model(torch.rand(16, 3, 384, 384)), params=dict(self.model.named_parameters()))
