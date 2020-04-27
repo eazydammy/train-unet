@@ -14,6 +14,7 @@ from PIL import Image
 import numpy as np
 from utils.color import add_color
 from torchviz import make_dot
+import copy
 
 class Manager(object):
 
@@ -26,7 +27,7 @@ class Manager(object):
         else:
             self.dataset = get_dataset_tools(args.dataset, **self.kwargs)
 
-        self.kwargs2 = self.kwargs
+        self.kwargs2 = copy.deepcopy(self.kwargs)
         self.kwargs2 = self.kwargs2.pop('model')
         self.model = get_model(name=args.model, **self.kwargs2)
 
