@@ -18,6 +18,7 @@ from torchviz import make_dot
 class Manager(object):
 
     def __init__(self, args):
+        args2 = args
         args = lr_parse(args)
         self.kwargs = vars(args)
         self.epochs = args.epochs
@@ -26,7 +27,9 @@ class Manager(object):
         else:
             self.dataset = get_dataset_tools(args.dataset, **self.kwargs)
 
-        self.kwargs2 = vars(tuple(x for x in self.kwargs if x[0] != 'model'))
+        rargs2 = tuple(x for x in args2 if x[0] != 'model')
+        rargs2 = lr_parse(rargs2)
+        self.kwargs2 = vars(rargs2)
         self.model = get_model(name=args.model, **self.kwargs2)
 
         # g = make_dot(self.model(torch.rand(16, 3, 384, 384)), params=dict(self.model.named_parameters()))
