@@ -225,7 +225,7 @@ class ResNet(nn.Module):
 
 def get_resnet(nbr_layers=50):
 
-    def build_net(backbone_pretrained_path='../../weights/resnet50.pth', nbr_classes=1000, is_bottleneck = True,
+    def build_net(backbone_pretrained_path='/weights/resnet50.pth', nbr_classes=1000, is_bottleneck = True,
                   backbone_pretrained=True, norm='bn', sk_conn = False, **kwargs):
         model = ResNet(nbr_classes, is_bottleneck, nbr_layers, norm=norm, sk_conn=sk_conn)
         if backbone_pretrained:
