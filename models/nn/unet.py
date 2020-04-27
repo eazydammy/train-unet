@@ -95,7 +95,7 @@ class UNetCore(nn.Module):
         return x
 
 class UNet(nn.Module):
-    def __init__(self, nbr_classes, backbone='vgg16', norm='bn', deep_supervision=True):
+    def __init__(self, nbr_classes, backbone='resnet50', norm='bn', deep_supervision=True):
         super(UNet, self).__init__()
         self.nbr_classes = nbr_classes
         self.deep_supervision = deep_supervision
@@ -138,7 +138,7 @@ class UNet(nn.Module):
             return x, aux
         return x
 
-def get_unet(backbone='vgg16', model_pretrained=True,
+def get_unet(backbone='resnet50', model_pretrained=True,
                model_pretrain_path=None, dataset='ade20k', norm='bn'):
     nbr_classes = datasets[dataset].NBR_CLASSES
     psp = UNet(nbr_classes, backbone, norm=norm)
