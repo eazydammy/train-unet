@@ -16,7 +16,7 @@ class ADE20KDataset(BaseDataSet):
     http://groups.csail.mit.edu/vision/datasets/ADE20K/
     """
     def __init__(self, **kwargs):
-        self.num_classes = 13
+        self.num_classes = 14
         self.palette = palette.ADE20K_palette
         super(ADE20KDataset, self).__init__(**kwargs)
 
