@@ -5,7 +5,7 @@ from .deeplabv3plus import get_deeplabv3plus
 from .unet import get_unet
 from .fcn import get_fcn
 
-def get_model(name, kwargs):
+def get_model(name, model, kwargs):
     models = {
         'pspnet': get_pspnet,
         'encnet': get_encnet,
