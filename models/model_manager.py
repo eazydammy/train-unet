@@ -27,9 +27,7 @@ class Manager(object):
         else:
             self.dataset = get_dataset_tools(args.dataset, **self.kwargs)
 
-        self.kwargs2 = copy.deepcopy(self.kwargs)
-        self.kwargs2 = self.kwargs2.pop('model')
-        self.model = get_model(name=args.model, **self.kwargs2)
+        self.model = get_model(name=args.model, **self.kwargs)
 
         # g = make_dot(self.model(torch.rand(16, 3, 384, 384)), params=dict(self.model.named_parameters()))
         # g.render('deeplabv3')
