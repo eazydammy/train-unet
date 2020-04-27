@@ -5,7 +5,10 @@
 
     "arch": {
         "type": "UNet",
-        "args": {}
+        "args": {
+            "freeze_bn": false,
+            "freeze_backbone": false
+        }
     },
 
     "train_loader": {
