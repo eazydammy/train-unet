@@ -29,7 +29,7 @@ class Manager(object):
 
         # self.model = get_model(name=args.model, **self.kwargs)
         self.model = get_unet(backbone='resnet50', model_pretrained=True,
-               model_pretrain_path=None, dataset='ade20k', norm='bn', **self.kwargs)
+               model_pretrain_path=None, dataset='ade20k', norm='bn')
 
         # g = make_dot(self.model(torch.rand(16, 3, 384, 384)), params=dict(self.model.named_parameters()))
         # g.render('deeplabv3')

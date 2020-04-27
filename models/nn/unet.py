@@ -95,13 +95,13 @@ class UNetCore(nn.Module):
         return x
 
 class UNet(nn.Module):
-    def __init__(self, nbr_classes, backbone='vgg16', norm='bn', deep_supervision=True, **kwargs):
+    def __init__(self, nbr_classes, backbone='vgg16', norm='bn', deep_supervision=True):
         super(UNet, self).__init__()
         self.nbr_classes = nbr_classes
         self.deep_supervision = deep_supervision
         self.up_method = {'mode': 'bilinear', 'align_corners': True}
         up_method = 'conv'
-        self.backbone = get_backbone(backbone, **kwargs)
+        self.backbone = get_backbone(backbone)
         self.core = UNetCore(out_channels=nbr_classes,
                              norm=norm, up_method=up_method, skip_dims = self.backbone.skip_dims)
 
@@ -139,16 +139,10 @@ class UNet(nn.Module):
         return x
 
 def get_unet(backbone='vgg16', model_pretrained=True,
-               model_pretrain_path=None, dataset='ade20k', norm='bn', **kwargs):
+               model_pretrain_path=None, dataset='ade20k', norm='bn'):
     nbr_classes = datasets[dataset].NBR_CLASSES
-    psp = UNet(nbr_classes, backbone, norm=norm, **kwargs)
+    psp = UNet(nbr_classes, backbone, norm=norm)
     if model_pretrained:
         psp.load_state_dict(torch.load(model_pretrain_path)['state_dict'], strict=False)
         print("model weights are loaded successfully")
     return psp
-
-if __name__ == '__main__':
-    model = get_unet(backbone='resnet50', model_pretrained=False, backbone_pretrained=False, deep_supervision=True,
-                     sk_conn=True)
-    g = make_dot(model(torch.rand(16, 3, 256, 256)), params=dict(model.named_parameters()))
-    g.render('unet_resnet50')
