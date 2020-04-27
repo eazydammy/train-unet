@@ -52,7 +52,7 @@
     },
 
     "loss": "CrossEntropyLoss2d",
-    "ignore_index": 0,
+    "ignore_index": -1,
     "lr_scheduler": {
         "type": "Poly",
         "args": {}
