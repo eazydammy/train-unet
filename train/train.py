@@ -14,7 +14,7 @@ from core.data.dataloader import get_segmentation_dataset
 from torchvision import transforms
 from core.utils.distributed import *
 
-os.environ['CUDA_VISIBLE_DEVICES'] = '1'
+os.environ['CUDA_VISIBLE_DEVICES'] = '0'
 
 def train(args, model, enc=False):
     # image transform
