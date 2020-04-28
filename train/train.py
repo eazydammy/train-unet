@@ -14,7 +14,7 @@ from core.data.dataloader import get_segmentation_dataset
 from torchvision import transforms
 from core.utils.distributed import *
 
-os.environ['CUDA_VISIBLE_DEVICES'] = '0, 1, 2, 3'
+os.environ['CUDA_VISIBLE_DEVICES'] = '1'
 
 def train(args, model, enc=False):
     # image transform
@@ -273,14 +273,14 @@ if __name__ == '__main__':
     parser.add_argument('--cuda', action='store_true', default=True)  #NOTE: cpu-only not tested yet
     parser.add_argument('--model', default= "lednet")
     parser.add_argument('--datadir', default='./datasets')
-    parser.add_argument('--NUM-CLASSES', type=int, default=150,
+    parser.add_argument('--NUM-CLASSES', type=int, default=13,
                         help='ADE20K classes')
     parser.add_argument('--base-size', type=int, default=520,
                         help='base image size')
     parser.add_argument('--crop-size', type=int, default=480,
                         help='crop image size')
     parser.add_argument('--num-epochs', type=int, default=50)
-    parser.add_argument('--num-workers', type=int, default=8)
+    parser.add_argument('--num-workers', type=int, default=1)
     parser.add_argument('--batch-size', type=int, default=8)
     parser.add_argument('--lr', type=float, default=1e-3)
     parser.add_argument('--steps-loss', type=int, default=50)
