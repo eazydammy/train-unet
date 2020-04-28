@@ -272,7 +272,7 @@ if __name__ == '__main__':
     parser = ArgumentParser()
     parser.add_argument('--cuda', action='store_true', default=True)  #NOTE: cpu-only not tested yet
     parser.add_argument('--model', default= "lednet")
-    parser.add_argument('--datadir', default='./datasets')
+    parser.add_argument('--datadir', default='../datasets')
     parser.add_argument('--NUM-CLASSES', type=int, default=13,
                         help='ADE20K classes')
     parser.add_argument('--base-size', type=int, default=520,
